@@ -1,0 +1,7 @@
+GET http://localhost:5000/embedding
+content-type: application/json
+
+{
+    "mode": "mean",
+    "text": "This is a test sentence talking about an API. It can be used to upload images."
+}
