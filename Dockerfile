@@ -11,10 +11,16 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # install the dependencies
-RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 RUN pip install -r requirements.txt
+
+# download tokenizer and model
+RUN python -m nltk.downloader punkt
+RUN pwd
 
 # copy files to image
 COPY . /app
+
+# download models
+RUN python /app/download_models.py
 
 CMD [ "gunicorn", "-b", "0.0.0.0:5000", "--timeout=120", "app:app" ]
